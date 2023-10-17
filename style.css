@@ -3,6 +3,7 @@
 	-webkit-print-color-adjust: exact !important;   /* Chrome, Safari 6 – 15.3, Edge */
     forced-color-adjust: exact !important;                 /* Firefox 48 – 96 */
     print-color-adjust: exact !important;           /* Firefox 97+, Safari 15.4+ */
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 @media print {
 	* { margin: 0 !important; padding: 0 !important; }
@@ -46,13 +47,14 @@ body {
 	position: absolute;
 	left: 0;
 	height: 100%;
-	width: 20vw;
+	width: 22vw;
 	min-width: 200px;
 	align-items: stretch;
 	flex-shrink: 0;
 	background-color: #d7d7d7;
 	flex: 2;
 	z-index: 600;
+	padding-left: 30px;
 
   }
   
