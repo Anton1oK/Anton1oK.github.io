@@ -261,30 +261,6 @@
 
             });
 
-            function PrintElem(){
-                var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-
-                mywindow.document.write('<html><head><title>' + document.title  + '</title>');
-                mywindow.document.write('<base href="' + location.origin + location.pathname + '">');
-                mywindow.document.write('<link rel="stylesheet" href="style.css">');
-                mywindow.document.write('<style type="text/css">.style1{width: 100%;}</style>');
-
-                mywindow.document.write('<html><head><title>' + document.title  + '</title>');
-                mywindow.document.write('</head><body >');
-                mywindow.document.write('<h1>' + document.title  + '</h1>');
-                mywindow.document.write(document.getElementById("patterns").innerHTML);
-                mywindow.document.write('</body></html>');
-
-                mywindow.document.close(); // necessary for IE >= 10
-                mywindow.focus(); // necessary for IE >= 10*/
-
-                mywindow.print();
-                mywindow.close();
-
-                return true;
-            };
-            //const btn = document.getElementById("printButton");
-
         </script>
         <br><br>
     </body>
