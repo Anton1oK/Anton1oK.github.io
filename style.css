@@ -1,8 +1,8 @@
 * {
 	transition: none !important;
 	-webkit-print-color-adjust: exact !important;   /* Chrome, Safari 6 – 15.3, Edge */
-    forced-color-adjust: exact !important;                 /* Firefox 48 – 96 */
-    print-color-adjust: exact !important;           /* Firefox 97+, Safari 15.4+ */
+	forced-color-adjust: exact !important;          /* Firefox 48 – 96 */
+	print-color-adjust: exact !important;           /* Firefox 97+, Safari 15.4+ */
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 @media print {
@@ -13,15 +13,13 @@
 	  display:none;
 	  zoom: 10%;
 	  width: 1px;
-
 	}
+
 	.right{
 		left: 0;
 		top: 0;
 		overflow: visible;
 		width: 100vw;
-		
-
 	}
 
 	#container_2{
@@ -29,7 +27,7 @@
 		overflow: visible;
 		zoom: 87%;
 	}
-  }
+}
 
 body {
 
@@ -49,8 +47,8 @@ body {
 /* Split the screen in half */
 
   
-  /* Control the left side */
- .left {
+/* Control the left side */
+.left {
 	position: absolute;
 	left: 0;
 	height: 100%;
@@ -63,10 +61,10 @@ body {
 	z-index: 600;
 	padding-left: 30px;
 
-  }
+}
   
-  /* Control the right side */
-  .right {
+/* Control the right side */
+.right {
 	position: absolute;
 	right: 0;
 	width: 80vw;
@@ -77,8 +75,7 @@ body {
 	align-content: center;
 	flex: 8;
 	overflow: auto;
-  }
-
+}
 
 #container_1 {
 	position: relative;
@@ -107,8 +104,6 @@ body {
 	align-self: center;
 }
 
-
-
 .grid {
     
 	margin:0;
@@ -128,4 +123,16 @@ body {
 	outline:1px solid #000;
 	display:inline-block;
     z-index: 500;
+}
+
+input, select{
+	width:80px;
+    border:1px solid #ccc;
+	float: right;
+    margin-right: 10px;
+
+    -ms-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    -webkit-box-sizing:border-box; 
 }
