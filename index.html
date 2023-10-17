@@ -1,266 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-       
-        <link rel=stylesheet type="text/css" href="style.css">
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<head>
+		
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	   
+		<link rel=stylesheet type="text/css" href="style.css">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-    </head>
-    <body>
-        <div class="flex-container">
-            <div class="left" id="controls">
-                <h1>Pattern generator</h1>
-                <h2>by <a href="https://externalreference.com/">External Reference</a></h2>
-                <br></br>
-                <br></br>
-                <form>
-                    <label for="rowSel_name">Number of sample rows (1-10):</label>
-                    <select id="rowSel_id" name="rowSel_name" >
-                        <option value="1">1 </option> 
-                        <option value="2">2 </option> 
-                        <option selected="3">3 </option>
-                        <option value="4">4 </option>  
-                        <option value="5">5 </option>  
-                        <option value="6">6 </option>  
-                        <option value="7">7 </option>  
-                        <option value="8">8 </option>
-                        <option value="9">9 </option>
-                        <option value="10">10 </option>                    
-                    </select>
-                    <br></br>
-                    <label for="colSel_name">Number of sample columns (1-10):</label>
-                    <select id="colSel_id" name="colSel_name">
-                        <option value="1">1 </option> 
-                        <option value="2">2 </option> 
-                        <option selected="3">3 </option>
-                        <option value="4">4 </option>  
-                        <option value="5">5 </option>  
-                        <option value="6">6 </option>  
-                        <option value="7">7 </option>  
-                        <option value="8">8 </option>
-                        <option value="9">9 </option>
-                        <option value="10">10 </option>                     
-                    </select>
-                
+	</head>
+	<body>
+		<div class="flex-container">
+			<div class="left" id="controls">
+				<h1>Pattern generator</h1>
+				<h2>by <a href="https://externalreference.com/">External Reference</a></h2>
+				<br></br>
+				<br></br>
+				<form>
+					<label for="rowSel_name">Number of sample rows (1-10):</label>
+					<select id="rowSel_id" name="rowSel_name" >
+						<option value="1">1 </option> 
+						<option value="2">2 </option> 
+						<option selected="3">3 </option>
+						<option value="4">4 </option>  
+						<option value="5">5 </option>  
+						<option value="6">6 </option>  
+						<option value="7">7 </option>  
+						<option value="8">8 </option>
+						<option value="9">9 </option>
+						<option value="10">10 </option>                    
+					</select>
+					<br></br>
+					<label for="colSel_name">Number of sample columns (1-10):</label>
+					<select id="colSel_id" name="colSel_name">
+						<option value="1">1 </option> 
+						<option value="2">2 </option> 
+						<option selected="3">3 </option>
+						<option value="4">4 </option>  
+						<option value="5">5 </option>  
+						<option value="6">6 </option>  
+						<option value="7">7 </option>  
+						<option value="8">8 </option>
+						<option value="9">9 </option>
+						<option value="10">10 </option>                     
+					</select>
+				
 
-                    <br></br>
-                    <label for="finalRows">Number of rows in the pattern:</label>
-                    <input type="number" id="finalRows" name="finalRows" value="10">
+					<br></br>
+					<label for="finalRows">Number of rows in the pattern:</label>
+					<input type="number" id="finalRows" name="finalRows" value="10">
 
-                    <br></br>
-                    <label for="finalColumns">Number of columns in the pattern:</label>
-                    <input type="number" id="finalColumns" name="finalColumns" value="18">
+					<br></br>
+					<label for="finalColumns">Number of columns in the pattern:</label>
+					<input type="number" id="finalColumns" name="finalColumns" value="18">
 
-                    <br></br>
-                    <button id="btn" onclick="window.print();">Print pattern</button>
-                </form>
-            </div>
+					<br></br>
+					<button id="btn" onclick="window.print();">Print pattern</button>
+				</form>
+			</div>
 
-            <div div class="right" id="patterns">
+			<div div class="right" id="patterns">
 
-                <div  id="container_1"></div>
-                <div id="container_2"></div>  
+				<div  id="container_1"></div>
+				<div id="container_2"></div>  
 
-            </div>
-        </div>
+			</div>
+		</div>
 
-        <script>
+		<script>
 
-            const rowsSelect = document.getElementById("rowSel_id");
-            const colsSelect = document.getElementById("colSel_id");
+			const rowsSelect = document.getElementById("rowSel_id");
+			const colsSelect = document.getElementById("colSel_id");
 
-            const finalRowsSelect = document.getElementById("finalRows");
-            const finalColsSelect = document.getElementById("finalColumns");
-
-
-            var rowsNum = 3;
-            var colsNum = 3;
-
-            var finalRowsNum = 10;
-            var finalColsNum = 18;
-
-            var patternTree = [];
-
-            rowsSelect.addEventListener("change", handleSelectRowChange);
-            colsSelect.addEventListener("change", handleSelectColChange);
-
-            finalRowsSelect.addEventListener("change", handleSelectFinalRowChange);
-            finalColsSelect.addEventListener("change", handleSelectFinalColChange);
-
-            //console.log("Rows num value" + rowsNum);
-            
-            function handleSelectRowChange(event) {
-                rowsNum = event.target.value;
-                refreshGrid();                
-            }
-
-            function handleSelectColChange(event) {
-                colsNum = event.target.value;
-                refreshGrid();
-            }
-            
-            function handleSelectFinalRowChange(event) {
-                finalRowsNum = event.target.value;
-                refreshFinalGrid();  
-            }
-
-            function handleSelectFinalColChange(event) {
-                finalColsNum = event.target.value;
-                refreshFinalGrid();
-            }
+			const finalRowsSelect = document.getElementById("finalRows");
+			const finalColsSelect = document.getElementById("finalColumns");
 
 
-            // function that builds a grid in the "container"
-            function createGrid(x,y) {
-                document.getElementById("container_1").style.width = String(50*colsNum)+"px";
-                document.getElementById("container_1").style.height = String(50*rowsNum)+"px";
-                
-                var samplePattern = Array(rowsNum*colsNum);
-                samplePattern.fill(0);
-                patternTree = [];
-                patternTree = splitIntoChunk(samplePattern, colsNum);
-                //console.log("Empty pattern tree: ",patternTree);
-                
-                for (var rows = 0; rows < x; rows++) {
-                    for (var columns = 0; columns < y; columns++) {
-                        $("#container_1").append("<div class='grid'></div>");
-                    };
-                };
+			var rowsNum = 3;
+			var colsNum = 3;
 
-                $(".grid").width(50);
-                $(".grid").height(50);
+			var finalRowsNum = 10;
+			var finalColsNum = 18;
 
-                $("#container_1").children().each(function(){
-                        
-                        $(this).attr("val",0);
-                    });
+			var patternTree = [];
 
-                $(".grid").click(function() {
+			rowsSelect.addEventListener("change", handleSelectRowChange);
+			colsSelect.addEventListener("change", handleSelectColChange);
 
-                    if ($(this).css("background-color") == "rgb(0, 0, 0)"){
-                        $(this).attr("val", 0);
-                        $(this).css("background-color", "rgb(255, 255, 255)");
-                    }else{
-                        $(this).attr("val", 1);
-                        $(this).css("background-color", "black");
-                    }
+			finalRowsSelect.addEventListener("change", handleSelectFinalRowChange);
+			finalColsSelect.addEventListener("change", handleSelectFinalColChange);
 
-                    $("#container_1").children().each(function(){
-                        
-                        samplePattern[$(this).index()] = parseInt($(this).attr("val"));
-                    });
-                    //console.log("pattern tree before",patternTree)
-                    patternTree = splitIntoChunk(samplePattern, colsNum);
-                    //console.log("pattern tree chunked",patternTree)
+			//console.log("Rows num value" + rowsNum);
+			
+			function handleSelectRowChange(event) {
+				rowsNum = event.target.value;
+				refreshGrid();                
+			}
 
-                    refreshFinalGrid();
-                });
-                refreshFinalGrid();
-            };
+			function handleSelectColChange(event) {
+				colsNum = event.target.value;
+				refreshGrid();
+			}
+			
+			function handleSelectFinalRowChange(event) {
+				finalRowsNum = event.target.value;
+				refreshFinalGrid();  
+			}
+
+			function handleSelectFinalColChange(event) {
+				finalColsNum = event.target.value;
+				refreshFinalGrid();
+			}
 
 
-            //creation of the final pattern
-            function createFinalGrid(x, y, patternTree) {
-                const cellSize = 600/finalColsNum;
-                document.getElementById("container_2").style.width = String(cellSize*finalColsNum)+"px";
-                document.getElementById("container_2").style.height = String(cellSize*finalRowsNum)+"px";
-                
-                //console.log(pattern);
-                var final_tree = [];
-                var clonedTree = [...patternTree];
+			// function that builds a grid in the "container"
+			function createGrid(x,y) {
+				document.getElementById("container_1").style.width = String(50*colsNum)+"px";
+				document.getElementById("container_1").style.height = String(50*rowsNum)+"px";
+				
+				var samplePattern = Array(rowsNum*colsNum);
+				samplePattern.fill(0);
+				patternTree = [];
+				patternTree = splitIntoChunk(samplePattern, colsNum);
+				//console.log("Empty pattern tree: ",patternTree);
+				
+				for (var rows = 0; rows < x; rows++) {
+					for (var columns = 0; columns < y; columns++) {
+						$("#container_1").append("<div class='grid'></div>");
+					};
+				};
+
+				$(".grid").width(50);
+				$(".grid").height(50);
+
+				$("#container_1").children().each(function(){
+						
+						$(this).attr("val",0);
+					});
+
+				$(".grid").click(function() {
+
+					if ($(this).css("background-color") == "rgb(0, 0, 0)"){
+						$(this).attr("val", 0);
+						$(this).css("background-color", "rgb(255, 255, 255)");
+					}else{
+						$(this).attr("val", 1);
+						$(this).css("background-color", "black");
+					}
+
+					$("#container_1").children().each(function(){
+						
+						samplePattern[$(this).index()] = parseInt($(this).attr("val"));
+					});
+					//console.log("pattern tree before",patternTree)
+					patternTree = splitIntoChunk(samplePattern, colsNum);
+					//console.log("pattern tree chunked",patternTree)
+
+					refreshFinalGrid();
+				});
+				refreshFinalGrid();
+			};
 
 
-                for (var rows = 0; rows < x; rows++) {
-                    for (var columns = 0; columns < y; columns++) {
-                        $("#container_2").append("<div class='grid_final'></div>");
-                    };
-                };
-                
-                $(".grid_final").width(cellSize);
-                $(".grid_final").height(cellSize);
-
-                //console.log("cloned tree",clonedTree);
-                for (var r = 0; r < rowsNum; r++){
-                    //console.log("iteration "+r,patternTree[r]);
-                        var temp_1 = [];
-                        for (let c = 0; c < finalColsNum; c++){
-                            var patternChunk = patternTree[r];
-                            temp_1.push(patternChunk[c%patternChunk.length]);
-                        };
-                        clonedTree[r] =  temp_1;
-                    };
-                    
-                    for(var i = 0; i < finalRowsNum; i++){                   
-                        final_tree.push(clonedTree[i%clonedTree.length]);
-                    };
-
-                    //patternTree = final_tree;
-                    
-                var flatPattern = final_tree.flat(1);
-                //console.log("flat pattern "+flatPattern);
-
-                $("#container_2").children().each(function(){
-                    
-                    if(flatPattern[$(this).index()] == 1){
-                        $(this).css("background-color","rgb(0, 0, 0)");
-                    }else{
-                        $(this).css("background-color","rgb(255, 255, 255)");
-                    }
-
-                });
-            };
+			//creation of the final pattern
+			function createFinalGrid(x, y, patternTree) {
+				const cellSize = 600/finalColsNum;
+				document.getElementById("container_2").style.width = String(cellSize*finalColsNum)+"px";
+				document.getElementById("container_2").style.height = String(cellSize*finalRowsNum)+"px";
+				
+				//console.log(pattern);
+				var final_tree = [];
+				var clonedTree = [...patternTree];
 
 
-            // program to split array into smaller chunks
-            function splitIntoChunk(arr, chunk) {
-                //console.log("split func chunk",chunk);
-                //console.log("split func arr",arr);
-                var tree = [];
-                for (i=0; i < arr.length; i += parseInt(chunk)) {
+				for (var rows = 0; rows < x; rows++) {
+					for (var columns = 0; columns < y; columns++) {
+						$("#container_2").append("<div class='grid_final'></div>");
+					};
+				};
+				
+				$(".grid_final").width(cellSize);
+				$(".grid_final").height(cellSize);
 
-                    //console.log("split func i",i);
+				//console.log("cloned tree",clonedTree);
+				for (var r = 0; r < rowsNum; r++){
+					//console.log("iteration "+r,patternTree[r]);
+						var temp_1 = [];
+						for (let c = 0; c < finalColsNum; c++){
+							var patternChunk = patternTree[r];
+							temp_1.push(patternChunk[c%patternChunk.length]);
+						};
+						clonedTree[r] =  temp_1;
+					};
+					
+					for(var i = 0; i < finalRowsNum; i++){                   
+						final_tree.push(clonedTree[i%clonedTree.length]);
+					};
 
-                    let tempArray;
-                    tempArray = arr.slice(i, i + parseInt(chunk));
-                    //console.log("split func tempArray",tempArray);
-                    tree.push(tempArray);
-                    
-                };
-                //console.log("split func tree",tree);
-                return tree;
-            };
+					//patternTree = final_tree;
+					
+				var flatPattern = final_tree.flat(1);
+				//console.log("flat pattern "+flatPattern);
 
-            // function that prompts the user to select the number of boxes in a new grid
-            // the function then also creates that new grid
-            function refreshGrid(){
-                clearGrid();
-                createGrid(colsNum,rowsNum);
-            };
-            
-            function refreshFinalGrid(){
-                clearFinalGrid();
-                createFinalGrid(finalColsNum,finalRowsNum,patternTree);
-            };
+				$("#container_2").children().each(function(){
+					
+					if(flatPattern[$(this).index()] == 1){
+						$(this).css("background-color","rgb(0, 0, 0)");
+					}else{
+						$(this).css("background-color","rgb(255, 255, 255)");
+					}
 
-            // function that clears the grid
-            function clearGrid(){
-                $(".grid").remove();
-            };  
-
-            function clearFinalGrid(){
-                $(".grid_final").remove();
-            };  
-
-            $(document).ready(function() {
-                refreshGrid()
-                refreshFinalGrid()
-
-            });
+				});
+			};
 
 
-        </script>
-        <br><br>
-    </body>
+			// program to split array into smaller chunks
+			function splitIntoChunk(arr, chunk) {
+				//console.log("split func chunk",chunk);
+				//console.log("split func arr",arr);
+				var tree = [];
+				for (i=0; i < arr.length; i += parseInt(chunk)) {
+
+					//console.log("split func i",i);
+
+					let tempArray;
+					tempArray = arr.slice(i, i + parseInt(chunk));
+					//console.log("split func tempArray",tempArray);
+					tree.push(tempArray);
+					
+				};
+				//console.log("split func tree",tree);
+				return tree;
+			};
+
+			// function that prompts the user to select the number of boxes in a new grid
+			// the function then also creates that new grid
+			function refreshGrid(){
+				clearGrid();
+				createGrid(colsNum,rowsNum);
+			};
+			
+			function refreshFinalGrid(){
+				clearFinalGrid();
+				createFinalGrid(finalColsNum,finalRowsNum,patternTree);
+			};
+
+			// function that clears the grid
+			function clearGrid(){
+				$(".grid").remove();
+			};  
+
+			function clearFinalGrid(){
+				$(".grid_final").remove();
+			};  
+
+			$(document).ready(function() {
+				refreshGrid()
+				refreshFinalGrid()
+
+			});
+
+
+		</script>
+		<br><br>
+	</body>
