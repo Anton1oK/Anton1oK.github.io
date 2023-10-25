@@ -17,33 +17,13 @@
 				<br></br>
 				<br></br>
 				<form>
-					<label for="rowSel_name">Number of sample rows (1-10):</label>
-					<select id="rowSel_id" name="rowSel_name" >
-						<option value="1">1 </option> 
-						<option value="2">2 </option> 
-						<option selected="3">3 </option>
-						<option value="4">4 </option>  
-						<option value="5">5 </option>  
-						<option value="6">6 </option>  
-						<option value="7">7 </option>  
-						<option value="8">8 </option>
-						<option value="9">9 </option>
-						<option value="10">10 </option>                    
-					</select>
-					<br></br>
-					<label for="colSel_name">Number of sample columns (1-10):</label>
-					<select id="colSel_id" name="colSel_name">
-						<option value="1">1 </option> 
-						<option value="2">2 </option> 
-						<option selected="3">3 </option>
-						<option value="4">4 </option>  
-						<option value="5">5 </option>  
-						<option value="6">6 </option>  
-						<option value="7">7 </option>  
-						<option value="8">8 </option>
-						<option value="9">9 </option>
-						<option value="10">10 </option>                     
-					</select>
+					<p><label for="range_rowSel">Number of sample rows (1-20):   </label> <input type="range" name="rowSel" id="range_rowSel" class="slider" min="1" max="20" value="3" step="1">
+						<span  class="slider_label"></span></p>
+					
+					<p><label for="range_colSel">Number of sample columns (1-20):   </label> <input type="range" name="colSel" id="range_colSel" class="slider" min="1" max="20" value="3" step="1">
+						<span  class="slider_label"></span></p>
+
+
 				
 
 					<br></br>
@@ -69,8 +49,8 @@
 
 		<script>
 
-			const rowsSelect = document.getElementById("rowSel_id");
-			const colsSelect = document.getElementById("colSel_id");
+			const rowsSelect = document.getElementById("range_rowSel");
+			const colsSelect = document.getElementById("range_colSel");
 
 			const finalRowsSelect = document.getElementById("finalRows");
 			const finalColsSelect = document.getElementById("finalColumns");
@@ -91,6 +71,19 @@
 			finalColsSelect.addEventListener("change", handleSelectFinalColChange);
 
 			//console.log("Rows num value" + rowsNum);
+
+			$(function()
+			{
+				$('.slider').on('input change', function(){
+						$(this).next($('.slider_label')).html(this.value);
+						});
+					$('.slider_label').each(function(){
+						var value = $(this).prev().attr('value');
+						$(this).html(value);
+						});  
+				
+				
+			})
 			
 			function handleSelectRowChange(event) {
 				rowsNum = event.target.value;
